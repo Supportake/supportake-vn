@@ -28,11 +28,30 @@
     <style>
         /* Base layout & overflow protection across mobile and desktop */
         html, body {
-            max-width: 100%;
+            max-width: 100vw;
+            width: 100%;
             overflow-x: hidden;
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: #030712;
             color: #f8fafc;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            min-width: 0;
+        }
+
+        /* Mobile-first anti-overflow & readable tap target adjustments */
+        @media (max-width: 639.98px) {
+            header h1, section h2, footer p, a, button, span {
+                overflow-wrap: anywhere;
+                word-break: break-word;
+            }
+
+            input, select, textarea {
+                font-size: 16px !important;
+                max-width: 100%;
+            }
         }
 
         /* Animated cyber/hacker backdrop layer (never blocks clicks) */
@@ -233,7 +252,7 @@
     </div>
 
     <!-- Main Container -->
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 space-y-8">
+    <div class="relative z-10 max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 pt-4 sm:pt-6 space-y-6 sm:space-y-8 w-full">
 
         <!-- Header -->
         <header class="glass-panel rounded-3xl p-4 sm:p-6 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
@@ -258,10 +277,8 @@
                             </linearGradient>
                         </defs>
 
-                        <!-- Clean light cyber background matching reference -->
                         <rect width="80" height="80" fill="#f8fafc"/>
 
-                        <!-- Subtle cyan circuit lines behind shoulders -->
                         <g stroke="#22d3ee" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.85">
                             <path d="M18 58 L11 58 L11 45 L16 40 L16 33"/>
                             <path d="M22 46 L17 46 L17 29"/>
@@ -273,35 +290,27 @@
                             <circle cx="63" cy="28" r="1.8" fill="#22d3ee"/>
                         </g>
 
-                        <!-- Hoodie shoulders & arms -->
                         <path d="M10 73 C11 55, 22 46, 40 46 C58 46, 69 55, 70 73 L58 74 L54 58 L26 58 L22 74 Z" fill="url(#tealHoodGrad)" stroke="#0f172a" stroke-width="2" stroke-linejoin="round"/>
                         <path d="M17 53 C21 57, 25 63, 27 73" fill="none" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
                         <path d="M63 53 C59 57, 55 63, 53 73" fill="none" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
 
-                        <!-- Hoodie drawstrings -->
                         <line x1="35" y1="45" x2="35" y2="54" stroke="#0f172a" stroke-width="2.6" stroke-linecap="round"/>
                         <line x1="35" y1="45" x2="35" y2="54" stroke="#f1f5f9" stroke-width="1.1" stroke-linecap="round"/>
                         <line x1="45" y1="45" x2="45" y2="54" stroke="#0f172a" stroke-width="2.6" stroke-linecap="round"/>
                         <line x1="45" y1="45" x2="45" y2="54" stroke="#f1f5f9" stroke-width="1.1" stroke-linecap="round"/>
 
-                        <!-- Hood outer shell -->
                         <path d="M25 44 C22 25, 27 10, 40 9 C53 10, 58 25, 55 44 C50 47, 45 48, 40 48 C35 48, 30 47, 25 44 Z" fill="url(#tealHoodGrad)" stroke="#0f172a" stroke-width="2.2" stroke-linejoin="round"/>
-
-                        <!-- Dark inner hood recess -->
                         <path d="M28 42 C27 28, 31 18, 40 18 C49 18, 53 28, 52 42 C48 45, 44 46, 40 46 C36 46, 32 45, 28 42 Z" fill="#1e293b" stroke="#0f172a" stroke-width="1.6"/>
 
-                        <!-- Forehead & sharp eyes -->
                         <path d="M31 25 C34 23, 46 23, 49 25 L48 31 L32 31 Z" fill="#e2a887"/>
                         <path d="M32 26.5 L38.5 28 L33 29.8 Z" fill="#0f172a"/>
                         <circle cx="35.6" cy="28.3" r="1.1" fill="#ffffff"/>
                         <path d="M48 26.5 L41.5 28 L47 29.8 Z" fill="#0f172a"/>
                         <circle cx="44.4" cy="28.3" r="1.1" fill="#ffffff"/>
 
-                        <!-- Teal ninja/hacker face mask -->
                         <path d="M31.5 30.5 C35 31.5, 45 31.5, 48.5 30.5 L46.5 41.5 L40 46 L33.5 41.5 Z" fill="url(#tealMaskGrad)" stroke="#0f172a" stroke-width="1.8" stroke-linejoin="round"/>
                         <line x1="40" y1="31.5" x2="40" y2="45.5" stroke="#0f172a" stroke-width="1.4" opacity="0.65"/>
 
-                        <!-- Laptop screen & base -->
                         <rect x="23" y="51" width="34" height="22" rx="2.5" fill="url(#laptopLidGrad)" stroke="#0f172a" stroke-width="2"/>
                         <rect x="25.2" y="53.2" width="29.6" height="17.6" rx="1.2" fill="none" stroke="#e2e8f0" stroke-width="0.9" opacity="0.75"/>
                         <rect x="19" y="72.5" width="42" height="3.2" rx="1.6" fill="#cbd5e1" stroke="#0f172a" stroke-width="1.8"/>
@@ -328,30 +337,30 @@
                 </div>
             </div>
 
-            <!-- Header Actions (Zalo, Copy SĐT, Mua Key, Kích Hoạt Key - strictly no tel: or call buttons) -->
-            <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+            <!-- Header Actions -->
+            <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5 w-full lg:w-auto shrink-0">
                 <button type="button" id="copy-phone-header-btn"
-                    class="px-3.5 py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 text-xs sm:text-sm font-mono font-bold inline-flex items-center gap-2 transition-all cursor-pointer">
-                    <i class="fa-regular fa-copy"></i>
-                    <span>0528.171.057</span>
+                    class="w-full sm:w-auto justify-center px-3 py-2.5 sm:px-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 text-xs sm:text-sm font-mono font-bold inline-flex items-center gap-1.5 sm:gap-2 transition-all cursor-pointer">
+                    <i class="fa-regular fa-copy shrink-0"></i>
+                    <span class="truncate">0528.171.057</span>
                 </button>
 
                 <a href="https://zalo.me/0528171057" target="_blank" rel="noopener noreferrer"
-                    class="px-3.5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs sm:text-sm font-bold inline-flex items-center gap-2 shadow-md shadow-sky-950/50 transition-all">
-                    <i class="fa-solid fa-comment-dots"></i>
-                    <span>Chat Zalo</span>
+                    class="w-full sm:w-auto justify-center px-3 py-2.5 sm:px-3.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs sm:text-sm font-bold inline-flex items-center gap-1.5 sm:gap-2 shadow-md shadow-sky-950/50 transition-all">
+                    <i class="fa-solid fa-comment-dots shrink-0"></i>
+                    <span class="truncate">Chat Zalo</span>
                 </a>
 
                 <button type="button" id="open-sale-modal-btn"
-                    class="px-3.5 py-2.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 text-xs sm:text-sm font-bold inline-flex items-center gap-2 transition-all cursor-pointer">
-                    <i class="fa-solid fa-tag"></i>
-                    <span>Liên Hệ Sale Mua Key</span>
+                    class="w-full sm:w-auto justify-center px-3 py-2.5 sm:px-3.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 text-xs sm:text-sm font-bold inline-flex items-center gap-1.5 sm:gap-2 transition-all cursor-pointer">
+                    <i class="fa-solid fa-tag shrink-0"></i>
+                    <span class="truncate">Mua Key</span>
                 </button>
 
                 <button type="button" id="open-key-modal-btn"
-                    class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-extrabold text-xs sm:text-sm inline-flex items-center gap-2 shadow-lg shadow-cyan-950/50 transition-all cursor-pointer">
-                    <i class="fa-solid fa-key"></i>
-                    <span>Kích Hoạt Key</span>
+                    class="w-full sm:w-auto justify-center px-3 py-2.5 sm:px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-extrabold text-xs sm:text-sm inline-flex items-center gap-1.5 sm:gap-2 shadow-lg shadow-cyan-950/50 transition-all cursor-pointer">
+                    <i class="fa-solid fa-key shrink-0"></i>
+                    <span class="truncate">Kích Hoạt Key</span>
                 </button>
             </div>
         </header>
@@ -359,7 +368,7 @@
         <!-- Pricing & Summary Cards -->
         <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="glass-panel rounded-2xl p-4 sm:p-5 flex items-center justify-between gap-3">
-                <div>
+                <div class="min-w-0">
                     <p class="text-[11px] font-mono uppercase tracking-wider text-cyan-300 font-bold">Gói Bản Quyền Tháng</p>
                     <p class="text-xl sm:text-2xl font-extrabold text-white mt-1 whitespace-nowrap">1.000.000 ₫</p>
                     <p class="text-xs text-slate-400 mt-0.5">Kích hoạt 1 thiết bị • Hỗ trợ 24/7</p>
@@ -370,7 +379,7 @@
             </div>
 
             <div class="glass-panel rounded-2xl p-4 sm:p-5 flex items-center justify-between gap-3">
-                <div>
+                <div class="min-w-0">
                     <p class="text-[11px] font-mono uppercase tracking-wider text-amber-300 font-bold">Gói Bản Quyền 1 Năm</p>
                     <p class="text-xl sm:text-2xl font-extrabold text-amber-300 mt-1 whitespace-nowrap">3.000.000 ₫</p>
                     <p class="text-xs text-slate-400 mt-0.5">Không giới hạn nền tảng • Tối đa 2 thiết bị</p>
@@ -381,7 +390,7 @@
             </div>
 
             <div class="glass-panel rounded-2xl p-4 sm:p-5 flex items-center justify-between gap-3">
-                <div>
+                <div class="min-w-0">
                     <p class="text-[11px] font-mono uppercase tracking-wider text-emerald-300 font-bold">Hệ Thống Hỗ Trợ</p>
                     <p class="text-xl sm:text-2xl font-extrabold text-white mt-1 whitespace-nowrap">6 Nền Tảng</p>
                     <p class="text-xs text-slate-400 mt-0.5">Zalo • Facebook • Instagram • X • TikTok • SMS</p>
@@ -395,7 +404,7 @@
         <!-- Strictly 6 Platforms: Zalo, Facebook, Instagram, X, TikTok, SMS -->
         <section aria-labelledby="platforms-heading" class="space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
-                <div>
+                <div class="min-w-0">
                     <h2 id="platforms-heading" class="text-xl sm:text-2xl font-extrabold text-white">
                         Chọn Nền Tảng Xem Tin Nhắn &amp; Mở Khoá Tài Khoản
                     </h2>
@@ -603,7 +612,7 @@
                 </span>
             </div>
 
-            <div class="overflow-x-auto rounded-xl border border-slate-800">
+            <div class="overflow-x-auto rounded-xl border border-slate-800 w-full">
                 <table class="w-full text-left border-collapse text-xs sm:text-sm">
                     <thead>
                         <tr class="bg-slate-900/95 text-cyan-300 font-mono text-xs uppercase border-b border-slate-800">
@@ -623,27 +632,27 @@
 
         <!-- Footer -->
         <footer class="glass-panel rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs sm:text-sm text-slate-300">
-            <div>
+            <div class="min-w-0">
                 <p class="font-extrabold text-white">Phần Mềm Xem Tin Nhắn Và Mở Khoá Tài Khoản - Ake Support</p>
                 <p class="text-slate-400 mt-0.5">Liên hệ Zalo &amp; SĐT: <span class="font-mono font-bold text-cyan-300">0528.171.057</span></p>
             </div>
-            <div class="flex flex-wrap items-center gap-2.5">
+            <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5 w-full sm:w-auto">
                 <button type="button" id="copy-phone-footer-btn"
-                    class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 font-mono font-bold inline-flex items-center gap-2 cursor-pointer transition-colors">
-                    <i class="fa-regular fa-copy"></i>
-                    <span>Sao chép 0528.171.057</span>
+                    class="w-full sm:w-auto justify-center px-3 py-2 sm:px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 font-mono font-bold inline-flex items-center gap-1.5 sm:gap-2 cursor-pointer transition-colors">
+                    <i class="fa-regular fa-copy shrink-0"></i>
+                    <span class="truncate">Sao chép SĐT</span>
                 </button>
                 <a href="https://zalo.me/0528171057" target="_blank" rel="noopener noreferrer"
-                    class="px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold inline-flex items-center gap-2 transition-colors">
-                    <i class="fa-solid fa-comment-dots"></i>
-                    <span>Zalo 0528.171.057</span>
+                    class="w-full sm:w-auto justify-center px-3 py-2 sm:px-3.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold inline-flex items-center gap-1.5 sm:gap-2 transition-colors">
+                    <i class="fa-solid fa-comment-dots shrink-0"></i>
+                    <span class="truncate">Zalo 0528.171.057</span>
                 </a>
             </div>
         </footer>
     </div>
 
     <!-- Bottom Activation Marquee Ticker -->
-    <div class="fixed bottom-0 inset-x-0 z-30 bg-slate-950/95 backdrop-blur-md border-t border-cyan-500/30 py-2.5 overflow-hidden">
+    <div class="fixed bottom-0 inset-x-0 z-30 bg-slate-950/95 backdrop-blur-md border-t border-cyan-500/30 py-2.5 overflow-hidden max-w-full">
         <div class="ticker-track text-xs sm:text-sm font-mono text-cyan-200">
             <div id="marquee-primary" class="flex items-center gap-8 pr-8 whitespace-nowrap"></div>
             <div id="marquee-clone" class="flex items-center gap-8 pr-8 whitespace-nowrap" aria-hidden="true"></div>
@@ -651,15 +660,15 @@
     </div>
 
     <!-- Platform Modal -->
-    <div id="platform-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-        <div class="glass-panel w-full max-w-lg rounded-3xl p-5 sm:p-6 space-y-4 max-h-[90vh] overflow-y-auto">
+    <div id="platform-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3.5 sm:p-4 bg-slate-950/80 backdrop-blur-sm">
+        <div class="glass-panel w-full max-w-lg rounded-3xl p-4 sm:p-6 space-y-4 max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-3.5">
                 <div class="flex items-center gap-3 min-w-0">
                     <div id="modal-platform-icon" class="w-12 h-12 rounded-2xl overflow-hidden shrink-0 shadow-md"></div>
                     <div class="min-w-0">
                         <div class="flex items-center gap-2">
                             <h3 id="modal-platform-title" class="text-lg sm:text-xl font-extrabold text-white truncate">Nền tảng</h3>
-                            <span id="modal-platform-badge" class="px-2 py-0.5 rounded-full text-[11px] font-mono font-bold"></span>
+                            <span id="modal-platform-badge" class="px-2 py-0.5 rounded-full text-[11px] font-mono font-bold shrink-0"></span>
                         </div>
                         <p class="text-xs text-slate-400">Ake Support • Hỗ trợ 24/7</p>
                     </div>
@@ -677,14 +686,14 @@
                     </label>
                     <div class="grid grid-cols-2 gap-2 p-1.5 rounded-2xl bg-slate-900 border border-slate-800">
                         <button type="button" id="mode-uid-btn"
-                            class="py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold bg-cyan-500 text-slate-950 inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer">
-                            <i class="fa-solid fa-link"></i>
-                            <span>Link Profile / UID</span>
+                            class="py-2.5 px-2.5 sm:px-3 rounded-xl text-xs sm:text-sm font-bold bg-cyan-500 text-slate-950 inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer">
+                            <i class="fa-solid fa-link shrink-0"></i>
+                            <span class="truncate">Link / UID</span>
                         </button>
                         <button type="button" id="mode-phone-btn"
-                            class="py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer">
-                            <i class="fa-solid fa-phone"></i>
-                            <span>Số Điện Thoại</span>
+                            class="py-2.5 px-2.5 sm:px-3 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer">
+                            <i class="fa-solid fa-phone shrink-0"></i>
+                            <span class="truncate">Số Điện Thoại</span>
                         </button>
                     </div>
                 </div>
@@ -714,40 +723,40 @@
                         class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-sm font-medium text-white placeholder-slate-500 outline-none focus:ring-2 focus:ring-cyan-500">
                 </div>
 
-                <!-- Unactivated Notice Banner (Zalo & Copy SĐT & Nhập Key only - no call button) -->
-                <div id="unactivated-notice-banner" class="hidden rounded-2xl bg-rose-950/60 border border-rose-500/40 p-4 space-y-3">
+                <!-- Unactivated Notice Banner -->
+                <div id="unactivated-notice-banner" class="hidden rounded-2xl bg-rose-950/60 border border-rose-500/40 p-3.5 sm:p-4 space-y-3">
                     <div class="flex items-start gap-2.5 text-rose-200 text-xs sm:text-sm">
                         <i class="fa-solid fa-circle-exclamation text-rose-400 mt-0.5 shrink-0"></i>
                         <p id="unactivated-notice-text">
                             Bạn chưa kích hoạt key vui lòng liên hệ Ake Support và số điện thoại 0528.171.057 để mua key
                         </p>
                     </div>
-                    <div class="flex flex-wrap items-center gap-2">
+                    <div class="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2">
                         <a href="https://zalo.me/0528171057" target="_blank" rel="noopener noreferrer"
-                            class="px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold inline-flex items-center gap-1.5">
+                            class="justify-center px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold inline-flex items-center gap-1.5">
                             <i class="fa-solid fa-comment-dots"></i>
                             <span>Chat Zalo 0528.171.057</span>
                         </a>
                         <button type="button" id="copy-phone-modal-btn"
-                            class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 text-xs font-mono font-bold inline-flex items-center gap-1.5 cursor-pointer">
+                            class="justify-center px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 text-xs font-mono font-bold inline-flex items-center gap-1.5 cursor-pointer">
                             <i class="fa-regular fa-copy"></i>
                             <span>Sao chép 0528.171.057</span>
                         </button>
                         <button type="button" id="open-key-from-notice-btn"
-                            class="px-3.5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-extrabold inline-flex items-center gap-1.5 cursor-pointer">
+                            class="justify-center px-3.5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-extrabold inline-flex items-center gap-1.5 cursor-pointer">
                             <i class="fa-solid fa-key"></i>
                             <span>Nhập Key Kích Hoạt</span>
                         </button>
                     </div>
                 </div>
 
-                <div class="flex items-center justify-end gap-2.5 pt-2">
+                <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2 sm:gap-2.5 pt-2">
                     <button type="button" id="cancel-platform-modal-btn"
-                        class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-bold cursor-pointer">
+                        class="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-bold inline-flex items-center cursor-pointer">
                         Đóng
                     </button>
                     <button type="submit"
-                        class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 text-sm font-extrabold inline-flex items-center gap-2 cursor-pointer">
+                        class="w-full sm:w-auto justify-center px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 text-sm font-extrabold inline-flex items-center gap-2 cursor-pointer">
                         <span>Xác Nhận &amp; Thực Thi</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </button>
@@ -757,20 +766,20 @@
     </div>
 
     <!-- Key Activation Modal -->
-    <div id="key-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-        <div class="glass-panel w-full max-w-md rounded-3xl p-5 sm:p-6 space-y-4 max-h-[90vh] overflow-y-auto">
+    <div id="key-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3.5 sm:p-4 bg-slate-950/80 backdrop-blur-sm">
+        <div class="glass-panel w-full max-w-md rounded-3xl p-4 sm:p-6 space-y-4 max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3.5">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 flex items-center justify-center">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 flex items-center justify-center shrink-0">
                         <i class="fa-solid fa-key"></i>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-extrabold text-white">Kích Hoạt Key Bản Quyền</h3>
+                    <div class="min-w-0">
+                        <h3 class="text-lg font-extrabold text-white truncate">Kích Hoạt Key Bản Quyền</h3>
                         <p class="text-xs text-slate-400">Ake Support License System</p>
                     </div>
                 </div>
                 <button type="button" id="close-key-modal-btn"
-                    class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                    class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center shrink-0 cursor-pointer">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -786,14 +795,13 @@
 
                 <div id="key-feedback-box" class="hidden rounded-xl px-3.5 py-2.5 text-xs font-semibold"></div>
 
-                <!-- Shown only after at least one valid key is activated -->
                 <div id="activated-keys-section" class="hidden rounded-2xl bg-slate-900/80 border border-cyan-500/30 p-3.5 space-y-3">
                     <div class="flex items-center justify-between gap-2">
                         <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-emerald-300">
                             <i class="fa-solid fa-circle-check mr-1"></i>Key Đã Kích Hoạt
                         </span>
                         <button type="button" id="cancel-all-keys-btn"
-                            class="px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/35 text-[11px] font-bold cursor-pointer transition-colors">
+                            class="px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/35 text-[11px] font-bold cursor-pointer transition-colors shrink-0">
                             Huỷ tất cả key
                         </button>
                     </div>
@@ -815,20 +823,20 @@
     </div>
 
     <!-- Glassmorphic "Liên Hệ Sale Mua Key" Modal -->
-    <div id="sale-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-        <div class="glass-panel w-full max-w-md rounded-3xl p-5 sm:p-6 space-y-4 border border-cyan-400/25">
+    <div id="sale-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3.5 sm:p-4 bg-slate-950/80 backdrop-blur-sm">
+        <div class="glass-panel w-full max-w-md rounded-3xl p-4 sm:p-6 space-y-4 border border-cyan-400/25 max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between border-b border-slate-800/90 pb-3.5">
-                <div class="flex items-center gap-3">
-                    <div class="w-11 h-11 rounded-2xl bg-cyan-500/15 border border-cyan-400/35 text-cyan-300 flex items-center justify-center">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div class="w-11 h-11 rounded-2xl bg-cyan-500/15 border border-cyan-400/35 text-cyan-300 flex items-center justify-center shrink-0">
                         <i class="fa-solid fa-headset text-lg"></i>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-extrabold text-white">Liên Hệ Sale Mua Key</h3>
+                    <div class="min-w-0">
+                        <h3 class="text-lg font-extrabold text-white truncate">Liên Hệ Sale Mua Key</h3>
                         <p class="text-xs text-slate-400">Ake Support • Hỗ trợ 24/7</p>
                     </div>
                 </div>
                 <button type="button" id="close-sale-modal-btn"
-                    class="w-9 h-9 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                    class="w-9 h-9 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-300 flex items-center justify-center shrink-0 cursor-pointer">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -850,9 +858,9 @@
             </div>
 
             <div class="rounded-2xl bg-slate-900/75 backdrop-blur-md border border-slate-800 p-3.5 flex items-center justify-between gap-3">
-                <div>
+                <div class="min-w-0">
                     <p class="text-[11px] text-slate-400">Ake Support • Số điện thoại</p>
-                    <p class="text-sm font-mono font-extrabold text-emerald-400 mt-0.5">0528.171.057</p>
+                    <p class="text-sm font-mono font-extrabold text-emerald-400 mt-0.5 truncate">0528.171.057</p>
                 </div>
                 <button type="button" id="copy-phone-sale-btn"
                     class="px-3.5 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 text-xs font-bold inline-flex items-center gap-1.5 cursor-pointer shrink-0">
@@ -878,7 +886,7 @@
     </div>
 
     <!-- Non-blocking Toast Message Box -->
-    <div id="toast-box" class="fixed top-5 right-5 z-[60] hidden max-w-sm rounded-2xl px-4 py-3 text-xs sm:text-sm font-semibold shadow-2xl border backdrop-blur-md"></div>
+    <div id="toast-box" class="fixed top-4 right-4 left-4 sm:left-auto z-[60] hidden max-w-sm sm:ml-auto rounded-2xl px-4 py-3 text-xs sm:text-sm font-semibold shadow-2xl border backdrop-blur-md"></div>
 
     <script>
         (function () {
@@ -889,7 +897,7 @@
             const SUPPORT_PHONE = '0528171057';
             const SUPPORT_PHONE_DISPLAY = '0528.171.057';
             const UNACTIVATED_NOTICE = 'Bạn chưa kích hoạt key vui lòng liên hệ Ake Support và số điện thoại 0528.171.057 để mua key';
-            // Safe storage wrapper with in-memory fallback for restricted/mobile browsers
+
             const fallbackMemory = new Map();
             const safeStorage = {
                 getItem(key) {
@@ -925,7 +933,6 @@
                 }
             };
 
-            // Strictly 6 platforms: Zalo, Facebook, Instagram, X, TikTok, SMS
             const PLATFORM_META = {
                 zalo: {
                     name: 'Zalo',
@@ -1100,7 +1107,7 @@
             }
 
             function persistTickets() {
-                safeStorage.setItem('ake_1739_tickets_v1', JSON.stringify(state.tickets));
+                safeStorage.setItem('ake_1739_tickets_v2', JSON.stringify(state.tickets));
             }
 
             let toastTimer = null;
@@ -1111,8 +1118,8 @@
 
                 const isError = type === 'error';
                 box.className = isError
-                    ? 'fixed top-5 right-5 z-[60] max-w-sm rounded-2xl px-4 py-3 text-xs sm:text-sm font-semibold shadow-2xl border backdrop-blur-md bg-rose-950/90 border-rose-500/50 text-rose-100'
-                    : 'fixed top-5 right-5 z-[60] max-w-sm rounded-2xl px-4 py-3 text-xs sm:text-sm font-semibold shadow-2xl border backdrop-blur-md bg-slate-900/95 border-cyan-400/50 text-cyan-100';
+                    ? 'fixed top-4 right-4 left-4 sm:left-auto z-[60] max-w-sm sm:ml-auto rounded-2xl px-4 py-3 text-xs sm:text-sm font-semibold shadow-2xl border backdrop-blur-md bg-rose-950/90 border-rose-500/50 text-rose-100'
+                    : 'fixed top-4 right-4 left-4 sm:left-auto z-[60] max-w-sm sm:ml-auto rounded-2xl px-4 py-3 text-xs sm:text-sm font-semibold shadow-2xl border backdrop-blur-md bg-slate-900/95 border-cyan-400/50 text-cyan-100';
                 box.textContent = message;
                 box.classList.remove('hidden');
 
@@ -1124,7 +1131,7 @@
             function copyPhone() {
                 if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
                     navigator.clipboard.writeText(SUPPORT_PHONE).then(
-                        () => notify(`Đã sao chép số điện thoại ${SUPPORT_PHONE}.`, 'success'),
+                        () => notify(`Đã sao chép số điện thoại ${SUPPORT_PHONE_DISPLAY}.`, 'success'),
                         () => fallbackCopyText(SUPPORT_PHONE)
                     );
                 } else {
@@ -1209,6 +1216,7 @@
                         </div>`)
                     .join('');
             }
+
             function openKeyModal() {
                 const modal = document.getElementById('key-modal');
                 const input = document.getElementById('license-key-input');
@@ -1270,13 +1278,13 @@
 
                 if (modeSelector) modeSelector.classList.remove('hidden');
                 if (state.identifierMode === 'phone') {
-                    if (phoneBtn) phoneBtn.className = 'py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold bg-cyan-500 text-slate-950 inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer';
-                    if (uidBtn) uidBtn.className = 'py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer';
+                    if (phoneBtn) phoneBtn.className = 'py-2.5 px-2.5 sm:px-3 rounded-xl text-xs sm:text-sm font-bold bg-cyan-500 text-slate-950 inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer';
+                    if (uidBtn) uidBtn.className = 'py-2.5 px-2.5 sm:px-3 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer';
                     if (label) label.textContent = 'Số điện thoại tài khoản';
                     if (input) input.placeholder = meta.phonePlaceholder;
                 } else {
-                    if (uidBtn) uidBtn.className = 'py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold bg-cyan-500 text-slate-950 inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer';
-                    if (phoneBtn) phoneBtn.className = 'py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer';
+                    if (uidBtn) uidBtn.className = 'py-2.5 px-2.5 sm:px-3 rounded-xl text-xs sm:text-sm font-bold bg-cyan-500 text-slate-950 inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer';
+                    if (phoneBtn) phoneBtn.className = 'py-2.5 px-2.5 sm:px-3 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer';
                     if (label) label.textContent = 'Link Profile / UID tài khoản';
                     if (input) input.placeholder = meta.uidPlaceholder;
                 }
@@ -1405,7 +1413,7 @@
                 tbody.innerHTML = TWENTY_CUSTOMERS
                     .map((c, idx) => `
                         <tr class="hover:bg-slate-900/60 transition-colors">
-                            <td class="py-2.5 px-3 font-mono text-xs text-slate-400">${idx + 1}</td>
+                            <td class="py-2.5 px-3 font-mono text-xs text-slate-400 whitespace-nowrap">${idx + 1}</td>
                             <td class="py-2.5 px-3 font-semibold text-white whitespace-nowrap">${escapeHtml(c.name)}</td>
                             <td class="py-2.5 px-3 font-mono text-xs text-cyan-300 whitespace-nowrap">${escapeHtml(c.platform)}</td>
                             <td class="py-2.5 px-3 text-xs text-slate-200 whitespace-nowrap">${escapeHtml(c.plan)}</td>
